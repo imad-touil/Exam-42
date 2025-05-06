@@ -18,39 +18,12 @@ size_t	ft_strlen(const char *str)
 	return (len);
 }
 
-// char	*ft_strjoin(char *s0, char *s1)
-// {
-// 	int	len0;
-// 	int	len1;
-// 	int	i;
-// 	char	*res;
-
-// 	if (!s0)
-// 		return (s1);
-// 	len0 = ft_strlen(s0);
-// 	len1 = ft_strlen(s1);
-// 	res = malloc(len0 + len1 + 1);
-// 	if (!res)
-// 		return (NULL);
-// 	i = -1;
-// 	while (s0[++i])
-// 		res[i] = s0[i];
-// 	i = -1;
-// 	while (s1[++i])
-// 	{
-// 		res[len0] = s1[i];
-// 		len0++;
-// 	}
-// 	res[len0] = '\0';
-// 	return (res);
-// }
-
 char	*get_line(int fd)
 {
 	static char *line;
 	int	exit;
 
-	line = malloc(2);
+	line = malloc(1024);
 	if (!line)
 	{
 		perror("Error");
@@ -85,7 +58,7 @@ int	is_match(char *line, char *str)
 	return (-1);
 }
 
-void	new_line(char *line, int len, int key)
+void	update_line(char *line, int len, int key)
 {
 	int	i;
 
@@ -95,8 +68,12 @@ void	new_line(char *line, int len, int key)
 		line[i] = '*';
 		i++;
 	}
-	// return (line);
 }
+
+// void	leak()
+// {
+// 	system("leaks -q a.out");
+// }
 
 int	main(int ac, char **av)
 {
@@ -105,6 +82,7 @@ int	main(int ac, char **av)
 	int		key;
 	int		i;
 
+	// atexit(leak);
 	if (ac != 2)
 		return (1);
 	line = get_line(0);
@@ -117,13 +95,14 @@ int	main(int ac, char **av)
 			key = is_match((char *)line + i, av[1]);
 			if (key != -1)
 			{
-				new_line((char *)line + i, len, key);
+				update_line((char *)line + i, len, key);
 				i += len;
 			}
 			else
 				i++;
 		}
 		printf("%s", line);
+		free(line);
 		line = get_line(0);
 	}
 }
