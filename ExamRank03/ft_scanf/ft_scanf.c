@@ -98,35 +98,3 @@ int ft_scanf(const char *format, ...)
 	va_end(ap);
 	return ret;
 }
-int main() {
-    int a = 0, b = -42, c = -42;
-    int ret;
-    
-    // Test case 2 (likely input: "0 23")
-    // We expect it to read two values: a=0 and b=23
-    // The current output shows it only reading one value: a=0
-    // The test expects: ret=2, a=0, b=23, c=-42 (c unchanged)
-    
-    // Redirect stdin to a string for testing
-    FILE *input = fmemopen("0 23", 4, "r");
-    if (!input) {
-        printf("Failed to open memory file\n");
-        return 1;
-    }
-    
-    // Temporarily replace stdin
-    FILE *orig_stdin = stdin;
-    stdin = input;
-    
-    // Call the scanf function (likely with format "%d %d")
-    ret = ft_scanf("%d %d", &a, &b);
-    
-    // Restore stdin
-    stdin = orig_stdin;
-    fclose(input);
-    
-    // Print the results
-    printf("2: ret = %d, a = %d, b = %d, c = %d\n", ret, a, b, c);
-    
-    return 0;
-}

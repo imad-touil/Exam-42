@@ -1,0 +1,14 @@
+/* Subject:
+Mimic standard scanf function
+*** OLD *** Allowed functions and globals: isspace, isdigit, va_start, va_arg, va_copy, va_end
+Allowed functions: fgetc, ungetc, ferror, feof, isspace, isdigit, stdin, va_start, va_arg, va_copy, va_end
+Realize only the conversations - s, d, c.
+Dont have to handle the options *, m and '.
+Dont have to handle the maximum field width
+Dont have to handle the types modifier characters (h, hh, l...)
+Dont have to handle the conversations beginning with %n$
+Your function int ft_scanf(const char *format, ...);
+
+
+
+
