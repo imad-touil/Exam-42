@@ -1,7 +1,11 @@
 #include <stdio.h> 
+#include <ctype.h>
 
-int main(void)
+int	main(void)
 {
-    for (int i = 0; i < 10; i++)
-        printf("Hello world %d\n", i);
+	// unsigned char c;
+	// scanf("%c", &c);
+	// printf("%c\n", c);
+    // printf("%d", isspace('\n'));
+    scanf(" ");
 }

@@ -5,21 +5,37 @@
 int match_space(FILE *f)
 {
         // Some code here
-
+	int	ch = fgetc(f);
+	while (ch != EOF && isspace(ch))
+		ch = fgetc(f);
+	if (ch == EOF)
+		return (-1);
+	ungetc(ch, f);
 	return 1;
 }
+// 	return 1;
 
 int match_char(FILE *f, char c)
 {
         // Some code here
-
+	int	ch = fgetc(f);
+	if (ch == EOF || ch != c)
+		return (-1);
+	ungetc(ch, f);
 	return 1;
 }
 
 int scan_char(FILE *f, va_list ap)
 {
         // Some code here
+	char*	ch;
+	int		c;
 
+	ch = va_arg(ap, char *);
+	c = fgetc(f);
+	if (c == EOF)
+		return (-1);
+	*ch = c;
 	return 1;
 }
 
@@ -97,4 +113,12 @@ int ft_scanf(const char *format, ...)
 	int ret = ft_vfscanf(stdin, format, ap);
 	va_end(ap);
 	return ret;
+}
+
+int	main(void)
+{
+	int c;
+	// ft_scanf("%c", &c);
+	// printf("%c\n", c);
+	ft_scanf(" ");
 }
