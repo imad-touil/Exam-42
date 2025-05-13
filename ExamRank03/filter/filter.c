@@ -20,23 +20,25 @@ size_t	ft_strlen(const char *str)
 
 char	*get_line(int fd)
 {
-	static char *line;
+	char *line;
 	int	exit;
 
-	line = malloc(1024);
+	line = malloc(99999999999);
 	if (!line)
 	{
 		perror("Error");
 		return (NULL);
 	}
-	exit = read(fd, line, 1024);
+	exit = read(fd, line, 99999999);
 	if (!exit)
 	{
 		free(line);
 		return (NULL);
 	}
+	line[exit] = '\0';
 	return (line);
 }
+
 
 int	is_match(char *line, char *str)
 {
