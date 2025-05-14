@@ -42,13 +42,57 @@ int scan_char(FILE *f, va_list ap)
 int scan_int(FILE *f, va_list ap)
 {
         // Some code here
+	int	number;
+	int	sign;
+	int	character;
+	int	digit_scanned;
+	int	*res;
 
+	number = 0;
+	sign = 1;
+	character = fgetc(f);
+	digit_scanned = 0;
+	if (character == '-' || character == '+')
+	{
+		if (character == '-')
+			sign *= -1;
+		character = fgetc(f);
+	}
+	while (character != EOF && isdigit(character))
+	{
+		number = number * 10 + (character - '0');
+		character = fgetc(f);
+		digit_scanned++;
+	}
+	if (character != EOF)
+		ungetc(character, f);
+	if (digit_scanned == 0)
+		return (0);
+	res = va_arg(ap, int *);
+	*res = number * sign;
 	return 1;
 }
 
 int scan_string(FILE *f, va_list ap)
 {
     // Some code here
+	int		i;
+	char	*str;
+	int		character;
+
+	i = 0;
+	str = va_arg(ap, char *);
+	character = fgetc(f);
+	while (character != EOF && !isspace(character))
+	{
+		str[i] = character;
+		character = fgetc(f);
+		i++;
+	}
+	if (character != EOF)
+		ungetc(character, f);
+	if (i == 0)
+		return (0);
 	return 1;
 }
 
@@ -117,8 +161,13 @@ int ft_scanf(const char *format, ...)
 
 int	main(void)
 {
-	int c;
-	// ft_scanf("%c", &c);
-	// printf("%c\n", c);
-	ft_scanf(" ");
+	// int c;
+	// // ft_scanf("%c", &c);
+	// // printf("%c\n", c);
+	// ft_scanf("%d", &c);
+	// printf("| %d |\n", c);
+	// ********************
+	char	str[100];
+	ft_scanf("%s", str);
+	printf("%s\n", str);
 }
