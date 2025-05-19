@@ -18,25 +18,53 @@ size_t	ft_strlen(const char *str)
 	return (len);
 }
 
+// char	*get_line(int fd)
+// {
+// 	char *line;
+// 	int	exit;
+
+// 	line = malloc(99999999999);
+// 	if (!line)
+// 	{
+// 		perror("Error");
+// 		return (NULL);
+// 	}
+// 	exit = read(fd, line, 99999999);
+// 	if (!exit)
+// 	{
+// 		free(line);
+// 		return (NULL);
+// 	}
+// 	line[exit] = '\0';
+// 	return (line);
+// }
+
 char	*get_line(int fd)
 {
-	char *line;
-	int	exit;
+	int		byte;
+	int		i;
+	char	c;
+	char	*str;
 
-	line = malloc(99999999999);
-	if (!line)
+	str = malloc(999999999999);
+	if (!str)
+		return (NULL);
+	byte = read(fd, &c, 1);
+	i = 0;
+	while (byte > 0)
 	{
-		perror("Error");
+		str[i] = c;
+		if (c == '\n' || c == EOF)
+			break ;
+		i++;
+		byte = read(fd, &c, 1);
+	}
+	if (i == 0 || byte < 0)
+	{
+		free(str);
 		return (NULL);
 	}
-	exit = read(fd, line, 99999999);
-	if (!exit)
-	{
-		free(line);
-		return (NULL);
-	}
-	line[exit] = '\0';
-	return (line);
+	return (str);
 }
 
 int	is_match(char *line, char *str)
