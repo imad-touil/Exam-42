@@ -18,7 +18,7 @@ char	*get_next_line(int fd)
 	while (byte > 0)
 	{
 		str[i] = c;
-		if (c == '\n')
+		if (c == '\n' || c == EOF)
 			break ;
 		i++;
 		byte = read(fd, &c, 1);
@@ -37,10 +37,10 @@ int	main(void)
 	char	*str;
 
 	fd = open("test.txt", O_RDWR, 0777);
-	str	= get_next_line(fd);
+	str	= get_next_line(0);
 	while (str)
 	{
-		printf("%s", str);
+		printf("| %s|", str);
 		str	= get_next_line(fd);
 	}
 	return (0);
