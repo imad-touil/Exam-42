@@ -45,13 +45,13 @@ int scan_int(FILE *f, va_list ap)
 	int	number;
 	int	sign;
 	int	character;
-	int	digit_scanned;
+	int	i;
 	int	*res;
 
 	number = 0;
 	sign = 1;
 	character = fgetc(f);
-	digit_scanned = 0;
+	i = 0;
 	if (character == '-' || character == '+')
 	{
 		if (character == '-')
@@ -62,11 +62,11 @@ int scan_int(FILE *f, va_list ap)
 	{
 		number = number * 10 + (character - '0');
 		character = fgetc(f);
-		digit_scanned++;
+		i++;
 	}
 	if (character != EOF)
 		ungetc(character, f);
-	if (digit_scanned == 0)
+	if (i == 0)
 		return (0);
 	res = va_arg(ap, int *);
 	*res = number * sign;
@@ -169,5 +169,5 @@ int	main(void)
 	// ********************
 	char	str[100];
 	ft_scanf("%s", str);
-	printf("%s\n", str);
+	printf("|   %s  |\n", str);
 }

@@ -39,7 +39,6 @@ char	*get_line(int fd)
 	return (line);
 }
 
-
 int	is_match(char *line, char *str)
 {
 	int	i;
