@@ -54,44 +54,44 @@ void print_board(char board[MAX_SIZE][MAX_SIZE], int size, int key)
 
 int	check_di(char board[MAX_SIZE][MAX_SIZE], int aard,int toul,int size)
 {
-	for (int i = 1; i < size; i++)
-	{
-		if (aard + i >= size || toul + i >= size)
-			break;
-		if (board[toul + i][aard + i] == 'Q')
-			return (0);
-	}
-	for (int i = 1; i < size; i++)
+	// for (int i = 0; i < size; i++)
+	// {
+	// 	if (aard + i >= size || toul + i >= size)
+	// 		break;
+	// 	if (board[toul + i][aard + i] == 'Q')
+	// 		return (0);
+	// }
+	for (int i = 0; i < size; i++)
 	{
 		if (aard - i < 0 || toul - i < 0)
 			break;
 		if (board[toul - i][aard - i] == 'Q')
 			return (0);
 	}
-	for (int i = 1; i < size; i++)
+	for (int i = 0; i < size; i++)
 	{
 		if (aard + i >= size || toul - i < 0)
 			break;
 		if (board[toul - i][aard + i] == 'Q')
 			return (0);
 	}
-	for (int i = 1; i < size; i++)
-	{
-		if (aard - i < 0 || toul + i >= size)
-			break;
-		if (board[toul + i][aard - i] == 'Q')
-			return (0);
-	}
+	// for (int i = 0; i < size; i++)
+	// {
+	// 	if (aard - i < 0 || toul + i >= size)
+	// 		break;
+	// 	if (board[toul + i][aard - i] == 'Q')
+	// 		return (0);
+	// }
 	return (1);
 }
 
 int	is_safe(char board[MAX_SIZE][MAX_SIZE], int aard,int toul,int size)
 {
-	for (int i = 0; i < size; i++)
-	{
-		if (board[toul][i] == 'Q')
-			return (0);
-	}
+	// for (int i = 0; i < size; i++)
+	// {
+	// 	if (board[toul][i] == 'Q')
+	// 		return (0);
+	// }
 	for (int i = 0; i < size; i++)
 	{
 		if (board[i][aard] == 'Q')

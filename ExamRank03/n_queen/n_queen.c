@@ -2,29 +2,70 @@
 #include <stdio.h>
 #include <unistd.h>
 
-void	print_board(char **board, int max_size)
+void print_board(char **board, int size, int key)
 {
-	for (int i = 0; i < max_size; i++)
+	if (!key)
 	{
-		for (int j = 0; j < max_size; j++)
-			printf("%c", board[i][j]);
-		printf("\n");
+		for (int i = 0; i < size; i++)
+		{
+			for (int j = 0; j < size; j++)
+			{
+				if (board[i][j] == 'Q')
+				{
+					printf("%d", j);
+					break;
+				}
+			}
+			if (i < size - 1)
+				printf(" ");
+		}
 	}
+	else
+	{
+		for (int i = 0; i < size; i++)
+		{
+			for (int j = 0; j < size; j++)
+				printf("%c",board[i][j]);
+			printf("\n");
+		}
+	}
+    printf("\n");
+}
+
+int	check_dig(char **board, int x, int y, int size)
+{
+	int	i;
+	int	j;
+
+	i = x;
+	j = y;
+	while (i >= 0 && j >= 0)
+	{
+		if (board[i][j] == 'Q')
+			return (0);
+		i -= 1;
+		j -= 1;
+	}
+	i = x;
+	j = y;
+	while (i >= 0 && j < size)
+	{
+		if (board[i][j] == 'Q')
+			return (0);
+		i -= 1;
+		j += 1;
+	}
+	return (1);
 }
 
 int	is_safe(char **board, int x, int y, int size)
 {
 	for (int i = 0; i < size; i++)
 	{
-		if (board[x][i] == 'Q')
-			return (0);
-	}
-	for (int i = 0; i < size; i++)
-	{
 		if (board[i][y] == 'Q')
 			return (0);
 	}
-	if (!check_dig()) // TODO
+	if (!check_dig(board, x, y, size)) 
 		return (0);
 	return (1);
 }
@@ -33,18 +74,20 @@ void	n_queen(char **board, int x, int y, int size)
 {
 	if (x == size)
 	{
-		print_board(board, size); // TODO
+		print_board(board, size, 0);
 		return ;
 	}
 	for (int i = 0; i < size; i++)
 	{
-		if (is_safe(board, i, y, size))
+		if (is_safe(board, x, i, size))
 		{
 			board[x][i] = 'Q';
 			n_queen(board, x + 1, 0, size);
-
+			board[x][i] = '.';
 		}
 	}
+	if (y == -42)
+		write(1, "Big Cheater\n", 12);
 }
 
 int	main(int ac, char **av)
@@ -67,9 +110,9 @@ int	main(int ac, char **av)
 	for (int i = 0; i < max_size; i++)
 	{
 		for (int j = 0; j < max_size; j++)
-			board[i][j] = '0';
+			board[i][j] = '.';
 		board[i][max_size] = '\0';
 	}
 	n_queen(board, 0, 0, max_size);
-	print_board(board, max_size);
+	// print_board(board, max_size);
 }
