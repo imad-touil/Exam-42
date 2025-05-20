@@ -22,9 +22,9 @@ int	MAX_SIZE = 20;
 // 	return board;
 // }
 
-void print_board(char board[MAX_SIZE][MAX_SIZE], int size, int i)
+void print_board(char board[MAX_SIZE][MAX_SIZE], int size, int key)
 {
-	if (!i)
+	if (!key)
 	{
 		for (int i = 0; i < size; i++)
 		{
