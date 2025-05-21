@@ -99,7 +99,7 @@ int	main(int ac, char **av)
 		return (1);
 	max_size = atoi(av[1]);
 	board = malloc(max_size * sizeof(char *));
-	if (!board)
+	if (!board)	
 		return (1);
 	for (int i = 0; i < max_size; i++)
 	{
