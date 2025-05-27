@@ -10,12 +10,11 @@ int match_space(FILE *f)
         ;
         
     if (c == EOF) {
-        if (ferror(f))
-            return -1;
-        if (feof(f))
-            return -1;
+        // if (ferror(f))
+        //     return -1;
+        // if (feof(f))
+        //     return -1;
     }
-    
     ungetc(c, f);
     return 1;
 }
@@ -184,7 +183,10 @@ int	main(void)
 {
 	char	str1[100];
 	int		num;
-	int	b1 = ft_scanf("%d", &num);
+	int	b1 = scanf("%d", &num);
 	printf("|   %d  |\n", num);
 	printf("return value from ft_scanf ==> %d\n", b1);
+
+    // int r = ft_scanf(" ");
+    // printf("%d\n", r);
 }
