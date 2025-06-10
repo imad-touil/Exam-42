@@ -15,7 +15,6 @@ int match_space(FILE *f)
         if (feof(f))
             return -1;
     }
-    
     ungetc(c, f);
     return 1;
 }
@@ -31,7 +30,6 @@ int match_char(FILE *f, char expected)
         ungetc(c, f);
         return 0;
     }
-    
     return 1;
 }
 
@@ -60,7 +58,6 @@ int scan_int(FILE *f, va_list ap)
         return -1;
     ungetc(c, f);
     
-    
     c = fgetc(f);
     if (c == '-') {
         sign = -1;
@@ -77,7 +74,7 @@ int scan_int(FILE *f, va_list ap)
     if (c != EOF)
         ungetc(c, f);
     if (digits == 0)
-        return 0;  
+        return 0;
     *ptr = value * sign;
     return 1;
 }
@@ -180,11 +177,22 @@ int ft_scanf(const char *format, ...)
     va_end(ap);
     return ret;
 }
+// int	main(void)
+// {
+// 	char	str1[100];
+// 	char	str2[100];
+// 	int		num1;
+// 	int		num2;
+// 	int	b1 = ft_scanf("%s %s", str1, str2);
+// 	printf("|   %s  %s  |\n", str1, str2);
+// 	printf("return value from ft_scanf ==> %d\n", b1);
+// }
+
 int	main(void)
 {
-	char	str1[100];
-	int		num;
-	int	b1 = ft_scanf("%d", &num);
-	printf("|   %d  |\n", num);
-	printf("return value from ft_scanf ==> %d\n", b1);
+	int	ret;
+	int d;
+
+	ret = ft_scanf("%d", &d);
+	printf("this is the character %d, && this is the return value %d\n", d, ret);
 }
