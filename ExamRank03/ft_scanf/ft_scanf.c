@@ -177,22 +177,13 @@ int ft_scanf(const char *format, ...)
     va_end(ap);
     return ret;
 }
-// int	main(void)
-// {
-// 	char	str1[100];
-// 	char	str2[100];
-// 	int		num1;
-// 	int		num2;
-// 	int	b1 = ft_scanf("%s %s", str1, str2);
-// 	printf("|   %s  %s  |\n", str1, str2);
-// 	printf("return value from ft_scanf ==> %d\n", b1);
-// }
-
 int	main(void)
 {
-	int	ret;
-	int d;
-
-	ret = ft_scanf("%d", &d);
-	printf("this is the character %d, && this is the return value %d\n", d, ret);
+	char	str1[100];
+	char	str2[100];
+	int		num1;
+	int		num2;
+	int	b1 = ft_scanf("%s %s", str1, str2);
+	printf("|   %s  %s  |\n", str1, str2);
+	printf("return value from ft_scanf ==> %d\n", b1);
 }

@@ -1,6 +1,8 @@
 #include <stdio.h> 
 #include <ctype.h>
 
+
+
 int	main(void)
 {
 	// int	c;
@@ -12,6 +14,6 @@ int	main(void)
 	// printf("| %d |\n", c);
 	// ********************
 	char	str[100];
-	scanf("%s", str);
-	printf("%s\n", str);
+	int r = scanf(" ");
+	printf("%d\n", r);
 }
