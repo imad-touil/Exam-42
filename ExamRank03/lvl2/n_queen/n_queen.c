@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   n_queen.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: imatouil <imatouil@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/17 16:55:15 by imatouil          #+#    #+#             */
+/*   Updated: 2025/06/17 21:05:28 by imatouil         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -77,13 +89,13 @@ void	n_queen(char **board, int x, int y, int size)
 		print_board(board, size, 0);
 		return ;
 	}
-	for (int i = 0; i < size; i++)
+	for (int y = 0; y < size; y++)
 	{
-		if (is_safe(board, x, i, size))
+		if (is_safe(board, x, y, size))
 		{
-			board[x][i] = 'Q';
+			board[x][y] = 'Q';
 			n_queen(board, x + 1, 0, size);
-			board[x][i] = '.';
+			board[x][y] = '.';
 		}
 	}
 	if (y == -42)
@@ -98,7 +110,7 @@ int	main(int ac, char **av)
 	if (ac != 2 || atoi(av[1]) <= 0)
 		return (1);
 	max_size = atoi(av[1]);
-	board = malloc(max_size * sizeof(char *));
+	board = malloc((max_size + 1) * sizeof(char *));
 	if (!board)	
 		return (1);
 	for (int i = 0; i < max_size; i++)
@@ -113,6 +125,7 @@ int	main(int ac, char **av)
 			board[i][j] = '.';
 		board[i][max_size] = '\0';
 	}
+	board[max_size] = NULL;
 	n_queen(board, 0, 0, max_size);
 	// print_board(board, max_size);
 }
