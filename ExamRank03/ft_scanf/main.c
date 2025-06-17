@@ -2,18 +2,15 @@
 #include <ctype.h>
 
 
-
-int	main(void)
+int main()
 {
-	// int	c;
-	// // unsigned char c;
-	// // scanf("%c", &c);
-	// // printf("%c\n", c);
-    // // printf("%d", isspace('\n'));
-	// scanf("%d", &c);
-	// printf("| %d |\n", c);
-	// ********************
-	char	str[100];
-	int r = scanf(" ");
-	printf("%d\n", r);
+	int		a;
+	int		b;
+	int		c;
+	char	ch;
+
+	// int ret = scanf("%d %d %d", &a, &b, &c);
+	// printf("return value ==> %d, a ==> %d, b ==>> %d, c ==>> %d\n", ret, a, b, c);
+	int	ret = scanf(" ");
+	printf("return value ==> '%d', character ==> '%c'\n", ret, c);
 }
