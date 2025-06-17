@@ -46,7 +46,7 @@ char	*get_line(int fd)
 	char	c;
 	char	*str;
 
-	str = malloc(999999999999);
+	str = malloc(2147483);
 	if (!str)
 		return (NULL);
 	byte = read(fd, &c, 1);

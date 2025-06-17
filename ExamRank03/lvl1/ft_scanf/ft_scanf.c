@@ -7,7 +7,7 @@ int match_space(FILE *f)
     int c;
 	c = fgetc(f);
 	if (c == EOF)
-		return 0; // check that if realy need
+		return -1;
 	if (!isspace(c))
 		return ungetc(c, f), 1;
 	while ((c = fgetc(f)) != EOF && isspace(c))
@@ -67,7 +67,7 @@ int scan_int(FILE *f, va_list ap)
 		c = fgetc(f);
 	}
 	if (flag == 0)
-		return ungetc(c, f),0;
+		return ungetc(c, f), 0;
 	if (c != EOF)
 		ungetc(c, f);
 	int *x = va_arg(ap, int *);
