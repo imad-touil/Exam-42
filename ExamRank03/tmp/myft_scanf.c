@@ -73,10 +73,10 @@ int scan_int(FILE *f, va_list ap)
         key++;
         c = fgetc(f);
     }
-    if (c == EOF)
-        return (ungetc(c, f));
+    if (c != EOF)
+        ungetc(c, f);
     if (!key)
-        return (ungetc(c, f), 0);
+        return (0);
     int *res = va_arg(ap, int *);
     *res = num * sign;
     return (1);
@@ -173,19 +173,19 @@ int ft_scanf(const char *format, ...)
 	return ret;
 }
 
-// int main()
-// {
-//     // char c;
-//     int a;
-//     int b;
-//     int c;
-//     int ret = ft_scanf("%d %d %d", &a, &b, &c);
-//     printf("return ==>> '%d' a ==> '%d', b ==> '%d', c ==> '%d',\n", ret, a, b, c);
+int main()
+{
+    // char c;
+    int a = -42;
+    int b = -42 ;
+    int c = - 42;
+    int ret = ft_scanf("%d, %d, %d", &a, &b, &c);
+    printf("return ==>> '%d' a ==> '%d', b ==> '%d', c ==> '%d',\n", ret, a, b, c);
 
-//     // char s1[100];
-//     // char s2[100];
-//     // char s3[100];
+    // char s1[100];
+    // char s2[100];
+    // char s3[100];
 
-//     // int ret = ft_scanf("%s %s %s", s1, s2, s3);
-//     // printf("return ==>> '%d' a ==> '%s', b ==> '%s', c ==> '%s',\n", ret, s1, s2, s3);
-// }
+    // int ret = ft_scanf("%s %s %s", s1, s2, s3);
+    // printf("return ==>> '%d' a ==> '%s', b ==> '%s', c ==> '%s',\n", ret, s1, s2, s3);
+}

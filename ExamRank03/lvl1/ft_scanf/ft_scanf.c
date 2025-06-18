@@ -166,13 +166,17 @@ int ft_scanf(const char *format, ...)
 
 int main()
 {
-	int		a;
-	int		b;
-	int		c;
-	char	ch;
+    // char c;
+    int a = -42;
+    int b = -42 ;
+    int c = - 42;
+    int ret = ft_scanf("%d, %d, %d", &a, &b, &c);
+    printf("return ==>> '%d' a ==> '%d', b ==> '%d', c ==> '%d',\n", ret, a, b, c);
 
-	// int ret = ft_scanf("%d %d %d", &a, &b, &c);
-	// printf("return value ==> %d, a ==> %d, b ==>> %d, c ==>> %d\n", ret, a, b, c);
-	int	ret = ft_scanf(" ");
-	printf("return value ==> '%d', character ==> '%c'\n", ret, c);
+    // char s1[100];
+    // char s2[100];
+    // char s3[100];
+
+    // int ret = ft_scanf("%s %s %s", s1, s2, s3);
+    // printf("return ==>> '%d' a ==> '%s', b ==> '%s', c ==> '%s',\n", ret, s1, s2, s3);
 }
