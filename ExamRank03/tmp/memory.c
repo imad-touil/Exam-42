@@ -6,47 +6,50 @@ int match_space(FILE *f)
 {
 	int	c;
 
-	return (1);
+	while ((c = fgetc(f)) != EOF && isspace(c))
+		;
+	if (c == EOF)
+		return (-1);
+	ungetc(c, f);
+	return 1;
 }
 
 int match_char(FILE *f, char c)
 {
-        // Some code here
 	int	ch;
 
 	ch = fgetc(f);
-	if (ch == c)
-		return (1);
 	if (ch == EOF)
 		return (-1);
 	if (ch != c)
-		return (ungetc(c, f), -1);
-	return (0);
+	{
+		ungetc(ch, f);
+		return (0);
+	}
+	return 1;
 }
 
 int scan_char(FILE *f, va_list ap)
 {
 	int	c;
+	char *res = va_arg(ap, char *);
 
 	c = fgetc(f);
 	if (c == EOF)
 		return (-1);
-	char *res = va_arg(ap, char *);
-	*res = c;
-	return (1);
+	*res = (char)c;
+	return 1;
 }
 
 int scan_int(FILE *f, va_list ap)
 {
+	int	sign = 1;
+	int	num = 0;
+	int	flag = 0;
+	int	*res = va_arg(ap, int *);
 	int	c;
-	int	num;
-	int	sign;
-	int	key;
 
-	num = 0;
-	sign = 1;
-	key = 0;
-	c = fgetc(f);
+	while ((c = ))
 	if (c == EOF)
 		return (-1);
 	if (c == '-' || c == '+')
@@ -58,42 +61,36 @@ int scan_int(FILE *f, va_list ap)
 	while (c != EOF && isdigit(c))
 	{
 		num = num * 10 + c - 48;
+		flag++;
 		c = fgetc(f);
-		key++;
 	}
-	if (c != EOF)
+	if (c == EOF)
 		ungetc(c, f);
-	if (!key)
-		return (ungetc(c, f), 0);
-	int	*res = va_arg(ap, int *);
+	if (flag == 0)
+		return (0);
 	*res = num * sign;
-	return (1);
+	return 1;
 }
 
 int scan_string(FILE *f, va_list ap)
 {
-    int c;
-    int key;
-    int i;
-    char    *str = va_arg(ap, char *);
-
-    i = 0;
-    key = 0;
-    c = fgetc(f);
-    if (c == EOF)
-        return (-1);
-    while (!isspace(c) && c != EOF)
-    {
-        str[i] = c;
-        c = fgetc(f);
-        key++;
-        i++;
-    }
-    str[i] = '\0';
-    if (c != EOF)
-        ungetc(c, f);
-    if (!key)
-        return (0);
+    int	i = 0;
+	int	c;
+	char	*res = va_arg(ap, char *);
+	c = fgetc(f);
+	if (c == EOF)
+		return (-1);
+	while (!isspace(c) && c != EOF)
+	{
+		res[i] = (char)c;
+		i++;
+		c = fgetc(f);
+	}
+	res[i] = '\0';
+	if (c == EOF)
+		ungetc(c, f);
+	if (i == 0)
+		return (1);
 	return 1;
 }
 
@@ -158,24 +155,4 @@ int ft_scanf(const char *format, ...)
 	int ret = ft_vfscanf(stdin, format, ap);
 	va_end(ap);
 	return ret;
-}
-
-
-int main()
-{
-	int		a;
-	int		b;
-	int		c;
-	char	ch;
-	char	str1[100];
-	char	str2[100];
-	char	str3[100];
-
-	// int ret = ft_scanf("%d %d %d", &a, &b, &c);
-	// printf("return value ==> %d, a ==> %d, b ==>> %d, c ==>> %d\n", ret, a, b, c);
-	// int	ret = ft_scanf(" ");
-	// printf("return value ==> '%d', character ==> '%c'\n", ret, c);
-
-	int	ret = ft_scanf("%s %s %s", str1, str2, str3);
-	printf("return val ==> %d, str1 ==> %s, str2 ==> %s, str3 ==> %s\n", ret, str1, str2, str3);
 }
