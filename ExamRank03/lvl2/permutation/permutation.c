@@ -70,11 +70,17 @@ void	ft_printstr(char *str, int len)
 	write(1, "\n", 1);
 }
 
+void	ll()
+{
+	system("leaks -q a.out");
+}
+
 int	main(int ac, char **av)
 {
 	int		len;
 	char	*str;
 
+	atexit(ll);
 	if (ac != 2)
 		return (1);
 	len = ft_strlen(av[1]);
