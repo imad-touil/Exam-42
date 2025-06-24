@@ -1,30 +1,16 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   permutation.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: imatouil <imatouil@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/23 02:07:09 by imatouil          #+#    #+#             */
-/*   Updated: 2025/06/23 02:56:00 by imatouil         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
 
-int	ft_strlen(char *str)
+int ft_strlen(char *s)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
+	int i = 0;
+	while (s[i])
 		i++;
-	return (i);
+	return i;
 }
 
-void	swap(char *a, char *b)
+void	ft_swap(char *a, char *b)
 {
 	char	tmp;
 
@@ -33,73 +19,77 @@ void	swap(char *a, char *b)
 	*b = tmp;
 }
 
-void	sort(char *str, int len)
+void	ft_sort(char *str, int len)
 {
-	char c;
-	for (int i = 0; i < len - 1; i++)
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < len - 1)
 	{
-		for (int j = 0; j < len - i - 1; j++)
+		j = -1;
+		while (++j < len - i -1)
 		{
 			if (str[j] > str[j + 1])
-				swap(&str[j], &str[j + 1]);
+				ft_swap(&str[j], &str[j + 1]);
 		}
 	}
 }
 
-void	print_per(char *str)
+void	ft_reverse(char *str, int start, int end)
 {
-	int	len;
+	while (start < end)
+	{
+		ft_swap(&str[start], &str[end]);
+		end--;
+		start++;
+	}
+}
 
-	len = ft_strlen(str);
+int	next_permutation(char *str, int len)
+{
+	int	i;
+	int	j;
+
+	i = len -2;
+	while (i >= 0 && str[i] >= str[i + 1])
+		i--;
+	if (i < 0)
+		return (0);
+	j = len - 1;
+	while (str[j] <= str[i])
+		j--;
+	ft_swap(&str[i], &str[j]);
+	ft_reverse(str, i + 1, len - 1);
+	return (1);
+}
+
+void	ft_printstr(char *str, int len)
+{
 	write(1, str, len);
 	write(1, "\n", 1);
 }
 
-int	is_used(char *str, int start, int current)
-{
-	for (int i = start; i < current; i++)
-	{
-		if (str[i] == str[current])
-			return (1);
-	}
-	return (0);
-}
-
-void	permut(char *str, int start, int end)
-{
-	if (start == end)
-		print_per(str);
-	else
-	{
-		for (int i = start; i <= end; i++)
-		{
-			if (is_used(str, start, i))
-				continue ;
-			swap(&str[start], &str[i]);
-			permut(str, start + 1, end);
-			swap(&str[start], &str[i]);
-		}
-		
-	}
-}
-
 int	main(int ac, char **av)
 {
-	int	len;
-	char *str;
+	int		len;
+	char	*str;
 
 	if (ac != 2)
 		return (1);
 	len = ft_strlen(av[1]);
+	if (len == 1)
+		return (puts(av[1]), 0);
 	str = malloc(len + 1);
 	if (!str)
 		return (1);
 	for (int i = 0; i < len; i++)
 		str[i] = av[1][i];
 	str[len] = '\0';
-	sort(str, len);
-	permut(str, 0, len - 1);
+	ft_sort(str, len);
+	ft_printstr(str, len);
+	while (next_permutation(str, len))
+		puts(str);
+	// ft_printstr(str, len);
 	free(str);
-	
 }
-
