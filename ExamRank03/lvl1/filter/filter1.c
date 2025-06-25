@@ -6,7 +6,7 @@
 /*   By: imatouil <imatouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 15:58:40 by imatouil          #+#    #+#             */
-/*   Updated: 2025/06/24 22:12:16 by imatouil         ###   ########.fr       */
+/*   Updated: 2025/06/25 22:55:06 by imatouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ char *get_next_line(int fd)
 			break ;
 		j = read(fd,&c,1);
 	}
+	buffer[i] = '\0';
 	if (!j)
 		return NULL;
 	return buffer;

@@ -6,7 +6,7 @@
 /*   By: imatouil <imatouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 10:13:45 by imatouil          #+#    #+#             */
-/*   Updated: 2025/06/24 20:02:42 by imatouil         ###   ########.fr       */
+/*   Updated: 2025/06/25 23:19:57 by imatouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,6 @@ int ft_vfscanf(FILE *f, const char *format, va_list ap)
             break;
         format++;
     }
-    
     if (ferror(f))
         return EOF;
     return nconv;
