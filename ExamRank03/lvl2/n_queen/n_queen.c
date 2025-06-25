@@ -6,7 +6,7 @@
 /*   By: imatouil <imatouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:55:15 by imatouil          #+#    #+#             */
-/*   Updated: 2025/06/17 21:05:28 by imatouil         ###   ########.fr       */
+/*   Updated: 2025/06/25 00:16:44 by imatouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,17 +89,17 @@ void	n_queen(char **board, int x, int y, int size)
 		print_board(board, size, 0);
 		return ;
 	}
-	for (int y = 0; y < size; y++)
+	for (int i = 0; i < size; i++)
 	{
-		if (is_safe(board, x, y, size))
+		if (is_safe(board, x, i, size))
 		{
-			board[x][y] = 'Q';
+			board[x][i] = 'Q';
 			n_queen(board, x + 1, 0, size);
-			board[x][y] = '.';
+			board[x][i] = '.';
 		}
 	}
 	if (y == -42)
-		write(1, "Big Cheater\n", 12);
+		write(1, "Go To Sleep\n", 12);
 }
 
 int	main(int ac, char **av)
@@ -127,5 +127,7 @@ int	main(int ac, char **av)
 	}
 	board[max_size] = NULL;
 	n_queen(board, 0, 0, max_size);
-	// print_board(board, max_size);
+	for (int i = 0; i < max_size;i++)
+		free(board[i]);
+	free(board);
 }

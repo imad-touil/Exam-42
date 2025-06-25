@@ -36,11 +36,11 @@ int	main(void)
 	int		fd;
 	char	*str;
 
-	fd = open("test.txt", O_RDWR, 0777);
-	str	= get_next_line(0);
+	fd = open("test.txt", O_RDWR, O_CREAT, 0777);
+	str	= get_next_line(fd);
 	while (str)
 	{
-		printf("| %s|", str);
+		printf("%s", str);
 		str	= get_next_line(fd);
 	}
 	return (0);

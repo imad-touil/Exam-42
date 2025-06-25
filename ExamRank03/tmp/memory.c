@@ -1,96 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   memory.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: imatouil <imatouil@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/24 20:00:44 by imatouil          #+#    #+#             */
+/*   Updated: 2025/06/24 21:04:29 by imatouil         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdarg.h>
 #include <stdio.h>
 #include <ctype.h>
 
 int match_space(FILE *f)
 {
-	int	c;
-
-	while ((c = fgetc(f)) != EOF && isspace(c))
-		;
-	if (c == EOF)
-		return (-1);
-	ungetc(c, f);
+	
 	return 1;
 }
 
 int match_char(FILE *f, char c)
 {
-	int	ch;
-
-	ch = fgetc(f);
-	if (ch == EOF)
-		return (-1);
-	if (ch != c)
-	{
-		ungetc(ch, f);
-		return (0);
-	}
+	
 	return 1;
 }
 
 int scan_char(FILE *f, va_list ap)
 {
-	int	c;
-	char *res = va_arg(ap, char *);
-
-	c = fgetc(f);
-	if (c == EOF)
-		return (-1);
-	*res = (char)c;
+	
 	return 1;
 }
 
 int scan_int(FILE *f, va_list ap)
 {
-	int	sign = 1;
-	int	num = 0;
-	int	flag = 0;
-	int	*res = va_arg(ap, int *);
-	int	c;
-
-	while ((c = ))
-	if (c == EOF)
-		return (-1);
-	if (c == '-' || c == '+')
-	{
-		if (c == '-')
-			sign = -1;
-		c = fgetc(f);
-	}
-	while (c != EOF && isdigit(c))
-	{
-		num = num * 10 + c - 48;
-		flag++;
-		c = fgetc(f);
-	}
-	if (c == EOF)
-		ungetc(c, f);
-	if (flag == 0)
-		return (0);
-	*res = num * sign;
+	
 	return 1;
 }
 
 int scan_string(FILE *f, va_list ap)
 {
-    int	i = 0;
-	int	c;
-	char	*res = va_arg(ap, char *);
-	c = fgetc(f);
-	if (c == EOF)
-		return (-1);
-	while (!isspace(c) && c != EOF)
-	{
-		res[i] = (char)c;
-		i++;
-		c = fgetc(f);
-	}
-	res[i] = '\0';
-	if (c == EOF)
-		ungetc(c, f);
-	if (i == 0)
-		return (1);
+	
 	return 1;
 }
 

@@ -6,7 +6,7 @@
 /*   By: imatouil <imatouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 15:58:40 by imatouil          #+#    #+#             */
-/*   Updated: 2025/06/22 15:59:53 by imatouil         ###   ########.fr       */
+/*   Updated: 2025/06/24 22:12:16 by imatouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-void	filter(char *str,char *filter)
+void	filter(char *str, char *filter)
 {
-	char *found = memmem(str,strlen(str),filter,strlen(filter));
+	char *found = memmem(str, strlen(str), filter, strlen(filter));
 	while(found)
 	{
 		int len = strlen(filter);
 		for(int i = 0;i < len;i++)
 			found[i] = '*';
-		found = memmem(found + len,strlen(found + len),filter,strlen(filter));
+		found = memmem(found + len, strlen(found + len), filter, strlen(filter));
 	}
 }
 
@@ -45,7 +45,7 @@ char *get_next_line(int fd)
 	{
 		buffer[i] = c;
 		i++;
-		if (memmem(buffer,i,"\n\0",strlen("\n\0")))
+		if (memmem(buffer, i, "\n\0", strlen("\n\0")))
 			break ;
 		j = read(fd,&c,1);
 	}
