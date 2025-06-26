@@ -51,7 +51,7 @@ int	next_permutation(char *str, int len)
 	int	i;
 	int	j;
 
-	i = len -2;
+	i = len - 2;
 	while (i >= 0 && str[i] >= str[i + 1])
 		i--;
 	if (i < 0)
