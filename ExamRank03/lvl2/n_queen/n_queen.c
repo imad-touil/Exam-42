@@ -6,7 +6,7 @@
 /*   By: imatouil <imatouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:55:15 by imatouil          #+#    #+#             */
-/*   Updated: 2025/06/25 00:16:44 by imatouil         ###   ########.fr       */
+/*   Updated: 2025/06/29 21:32:46 by imatouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,20 @@
 #include <stdio.h>
 #include <unistd.h>
 
-void print_board(char **board, int size, int key)
+void print_board(char **board, int size)
 {
-	if (!key)
+	for (int i = 0; i < size; i++)
 	{
-		for (int i = 0; i < size; i++)
+		for (int j = 0; j < size; j++)
 		{
-			for (int j = 0; j < size; j++)
+			if (board[i][j] == 'Q')
 			{
-				if (board[i][j] == 'Q')
-				{
-					printf("%d", j);
-					break;
-				}
+				printf("%d", j);
+				break;
 			}
-			if (i < size - 1)
-				printf(" ");
 		}
-	}
-	else
-	{
-		for (int i = 0; i < size; i++)
-		{
-			for (int j = 0; j < size; j++)
-				printf("%c",board[i][j]);
-			printf("\n");
-		}
+		if (i < size - 1)
+			printf(" ");
 	}
     printf("\n");
 }
@@ -86,7 +74,7 @@ void	n_queen(char **board, int x, int y, int size)
 {
 	if (x == size)
 	{
-		print_board(board, size, 0);
+		print_board(board, size);
 		return ;
 	}
 	for (int i = 0; i < size; i++)
@@ -98,8 +86,8 @@ void	n_queen(char **board, int x, int y, int size)
 			board[x][i] = '.';
 		}
 	}
-	if (y == -42)
-		write(1, "Go To Sleep\n", 12);
+	if (y == 1337)
+		write(1, "Future is loading...\n", 21);
 }
 
 int	main(int ac, char **av)
